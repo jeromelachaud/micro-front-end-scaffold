@@ -29,3 +29,19 @@ fetch(fetchUrl)
   _.filter(myArrayOfComics, o => o.pageCount < 100);
 });
 
+// 3. Filter the data so that it only includes comics that cost less than 4 dollars
+// Vanilla
+fetch(fetchUrl)
+.then((response) => response.json())
+.then((response) => {
+  const myArrayOfComics = response.data.results;
+  myArrayOfComics.forEach((arrayItem) => {
+    const myArrayOfPrices = arrayItem.prices;
+    myArrayOfPrices.forEach((priceItem) => {
+      if (priceItem.price < 4) {
+        priceItem;
+      }
+    });
+  });
+});
+
