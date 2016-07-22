@@ -20,3 +20,12 @@ fetch('http://gateway.marvel.com/v1/public/comics?apikey=fc67721c305c84f50f7c664
   });
 });
 
+// 2. Filter the data so that it only includes comics with less than 100 pages
+// lodash
+fetch(fetchUrl)
+.then((response) => response.json())
+.then((response) => {
+  const myArrayOfComics = response.data.results;
+  _.filter(myArrayOfComics, o => o.pageCount < 100);
+});
+
