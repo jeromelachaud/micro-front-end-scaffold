@@ -1,3 +1,19 @@
-body::after {
-  content:"css bundled";
+@import url('../node_modules/normalize.css/normalize.css');
+
+body {
+  background: darkred;
+  color: white;
+  font-family: 'BlinkMacSystemFont';
+}
+
+li {
+  width: 100vw;
+  padding: 0 0 1rem 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  width: 50%;
+  padding: .75rem 0 1rem 0;
 }
