@@ -12,8 +12,8 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  let myArrayOfObj = response.data.results;
-  myArrayOfObj.forEach((arrayItem) => {
+  const myArrayOfComicsObjects = response.data.results;
+  myArrayOfComicsObjects.forEach((arrayItem) => {
     if (arrayItem.pageCount < 100) {
       arrayItem;
     }
@@ -25,8 +25,8 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  const myArrayOfComics = response.data.results;
-  _.filter(myArrayOfComics, o => o.pageCount < 100);
+  const myArrayOfComicsObjects = response.data.results;
+  _.filter(myArrayOfComicsObjects, o => o.pageCount < 100);
 });
 
 // 3. Filter the data so that it only includes comics that cost less than 4 dollars
@@ -34,12 +34,12 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  const myArrayOfComics = response.data.results;
-  myArrayOfComics.forEach((arrayItem) => {
-    const myArrayOfPrices = arrayItem.prices;
-    myArrayOfPrices.forEach((priceItem) => {
-      if (priceItem.price < 4) {
-        priceItem;
+  const myArrayOfComicsObjects = response.data.results;
+  myArrayOfComicsObjects.forEach((arrayItem) => {
+    const myArrayOfPricesObjects = arrayItem.prices;
+    myArrayOfPricesObjects.forEach((arrayItem) => {
+      if (arrayItem.price < 4) {
+        arrayItem;
       }
     });
   });
