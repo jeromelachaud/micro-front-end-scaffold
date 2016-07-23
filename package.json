@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run serve & npm run watch",
-    "serve": "live-server",
+    "serve": "live-server --host=localhost",
     "watch": "watchify -t browserify-css src/app.js -o bundle.js --verbose"
   },
   "dependencies": {
