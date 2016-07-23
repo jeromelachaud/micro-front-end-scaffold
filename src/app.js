@@ -1,5 +1,5 @@
-let css = require('./app.css');
-let _ = require('lodash');
+const css = require('./app.css');
+const _ = require('lodash');
 
 const fetchUrl = 'http://gateway.marvel.com/v1/public/comics?apikey=fc67721c305c84f50f7c6646c9b8d9d0';
 
@@ -12,8 +12,8 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  let myArrayOfComicsObjects = response.data.results;
-  myArrayOfComicsObjects.filter((arrayItem) => {
+  const arrayOfObjects = response.data.results;
+  arrayOfObjects.filter((arrayItem) => {
     return arrayItem.pageCount < 100;
   });
 });
@@ -23,8 +23,8 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  const myArrayOfComicsObjects = response.data.results;
-  _.filter(myArrayOfComicsObjects, o => o.pageCount < 100);
+  const arrayOfObjects = response.data.results;
+  _.filter(arrayOfObjects, o => o.pageCount < 100);
 });
 
 // 3. Filter the data so that it only includes comics that cost less than 4 dollars
@@ -32,9 +32,9 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  let myArrayOfComicsObjects = response.data.results;
-  myArrayOfComicsObjects.map((arrayItem) => {arrayItem.prices; });
-  myArrayOfComicsObjects.filter((arrayItem) => {arrayItem.price < 4; });
+  const arrayOfObjects = response.data.results;
+  arrayOfObjects.map((arrayItem) => {arrayItem.prices;});
+  arrayOfObjects.filter((arrayItem) => {arrayItem.price < 4;});
 });
 
 // 3. Filter the data so that it only includes comics that cost less than 4 dollars
@@ -42,8 +42,8 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  const myArrayOfComicsObjects = response.data.results;
-  _.map(myArrayOfComicsObjects, 'prices[0].price')
+  const arrayOfObjects = response.data.results;
+  _.map(arrayOfObjects, 'prices[0].price')
   .filter((price) => price < 4);
 });
 
@@ -52,23 +52,23 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  const myArrayOfComicsObjects = response.data.results;
+  const arrayOfObjects = response.data.results;
   const comicsList = document.getElementById('comics');
 
-  myArrayOfComicsObjects.map((arrayItem) => {
-    const myTitle = arrayItem.title;
-    const comicItem = document.createElement('li');
-    comicsList.appendChild(comicItem);
-    comicItem.innerHTML = JSON.stringify(myTitle);
+  arrayOfObjects.map((arrayItem) => {
+    const comicTitle = arrayItem.title;
+    const liNode = document.createElement('li');
+    comicsList.appendChild(liNode);
+    liNode.innerHTML = JSON.stringify(comicTitle);
 
-    const myArrayOfImagesObjects = arrayItem.images;
-    myArrayOfImagesObjects.map((arrayItem) => {
-      const myImgPath = arrayItem.path;
-      const myImgExtension = arrayItem.extension;
-      const comicImgUrl = `${myImgPath}.${myImgExtension}`;
-      const comicImgTag = document.createElement('img');
-      comicImgTag.setAttribute('src', comicImgUrl);
-      comicItem.appendChild(comicImgTag);
+    const arrayOfNestedObjects = arrayItem.images;
+    arrayOfNestedObjects.map((arrayItem) => {
+      const imgPath = arrayItem.path;
+      const imgExtension = arrayItem.extension;
+      const imgFullUrl = `${imgPath}.${imgExtension}`;
+      const imgTag = document.createElement('img');
+      imgTag.setAttribute('src', imgFullUrl);
+      liNode.appendChild(imgTag);
     });
   });
 });
