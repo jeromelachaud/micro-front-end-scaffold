@@ -13,9 +13,7 @@ fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
   const arrayOfObjects = response.data.results;
-  arrayOfObjects.filter((arrayItem) => {
-    return arrayItem.pageCount < 100;
-  });
+  arrayOfObjects.filter((arrayItem) => arrayItem.pageCount < 100);
 });
 
 // 2. Filter the data so that it only includes comics with less than 100 pages
