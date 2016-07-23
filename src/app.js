@@ -12,11 +12,9 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  const myArrayOfComicsObjects = response.data.results;
-  myArrayOfComicsObjects.forEach((arrayItem) => {
-    if (arrayItem.pageCount < 100) {
-      arrayItem;
-    }
+  let myArrayOfComicsObjects = response.data.results;
+  myArrayOfComicsObjects.filter((arrayItem) => {
+    return arrayItem.pageCount < 100;
   });
 });
 
@@ -34,15 +32,9 @@ fetch(fetchUrl)
 fetch(fetchUrl)
 .then((response) => response.json())
 .then((response) => {
-  const myArrayOfComicsObjects = response.data.results;
-  myArrayOfComicsObjects.forEach((arrayItem) => {
-    const myArrayOfPricesObjects = arrayItem.prices;
-    myArrayOfPricesObjects.forEach((arrayItem) => {
-      if (arrayItem.price < 4) {
-        arrayItem;
-      }
-    });
-  });
+  let myArrayOfComicsObjects = response.data.results;
+  myArrayOfComicsObjects.map((arrayItem) => {arrayItem.prices; });
+  myArrayOfComicsObjects.filter((arrayItem) => {arrayItem.price < 4; });
 });
 
 // 3. Filter the data so that it only includes comics that cost less than 4 dollars
@@ -63,14 +55,14 @@ fetch(fetchUrl)
   const myArrayOfComicsObjects = response.data.results;
   const comicsList = document.getElementById('comics');
 
-  myArrayOfComicsObjects.forEach((arrayItem) => {
+  myArrayOfComicsObjects.map((arrayItem) => {
     const myTitle = arrayItem.title;
     const comicItem = document.createElement('li');
     comicsList.appendChild(comicItem);
     comicItem.innerHTML = JSON.stringify(myTitle);
 
     const myArrayOfImagesObjects = arrayItem.images;
-    myArrayOfImagesObjects.forEach((arrayItem) => {
+    myArrayOfImagesObjects.map((arrayItem) => {
       const myImgPath = arrayItem.path;
       const myImgExtension = arrayItem.extension;
       const comicImgUrl = `${myImgPath}.${myImgExtension}`;
