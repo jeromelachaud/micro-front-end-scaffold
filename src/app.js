@@ -45,3 +45,12 @@ fetch(fetchUrl)
   });
 });
 
+// 3. Filter the data so that it only includes comics that cost less than 4 dollars
+// lodash
+fetch(fetchUrl)
+.then((response) => response.json())
+.then((response) => {
+  const myArrayOfComicsObjects = response.data.results;
+  _.map(myArrayOfComicsObjects, 'prices[0].price')
+  .filter((price) => price < 4);
+});
