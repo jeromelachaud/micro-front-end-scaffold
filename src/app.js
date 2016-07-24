@@ -54,13 +54,14 @@ fetch(fetchUrl)
   const comicsList = document.getElementById('comics');
 
   arrayOfObjects.map((arrayItem) => {
-    const comicTitle = arrayItem.title;
     const liNode = document.createElement('li');
+    comicsList.appendChild(liNode);
+
+    const comicTitle = arrayItem.title;
     const comicUrl = arrayItem.urls[0].url;
     const urlTag = document.createElement('a');
-    urlTag.setAttribute('href', comicUrl);
     urlTag.innerHTML = JSON.stringify(comicTitle);
-    comicsList.appendChild(liNode);
+    urlTag.setAttribute('href', comicUrl);
     liNode.appendChild(urlTag);
 
     const firstImage = arrayItem.images[0];
