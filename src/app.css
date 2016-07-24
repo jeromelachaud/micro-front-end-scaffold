@@ -2,12 +2,19 @@
 
 body {
   background: darkred;
-  color: white;
   font-family: 'BlinkMacSystemFont';
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 li {
-  width: 100vw;
   padding: 0 0 1rem 0;
   list-style: none;
 }
