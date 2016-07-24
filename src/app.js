@@ -56,6 +56,7 @@ fetch(fetchUrl)
   arrayOfObjects.map((arrayItem) => {
     const comicTitle = arrayItem.title;
     const liNode = document.createElement('li');
+    const comicUrl = arrayItem.urls[0].url;
     comicsList.appendChild(liNode);
     liNode.innerHTML = JSON.stringify(comicTitle);
 
@@ -65,5 +66,6 @@ fetch(fetchUrl)
       const imgTag = document.createElement('img');
       imgTag.setAttribute('src', imgFullUrl);
       liNode.appendChild(imgTag);
+    const firstImages = arrayItem.images[0];
   });
 });
