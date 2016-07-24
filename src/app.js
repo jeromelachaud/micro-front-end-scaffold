@@ -105,3 +105,12 @@ getFetch(fetchUrl)
 })
 .catch((err) => alert(err));
 
+// 6.2. Filter the data so that it only includes comics with less than 100 pages
+// lodash
+getFetch(fetchUrl)
+.then((response) => {
+  response = JSON.parse(response);
+  const arrayOfObjects = response.data.results;
+  _.filter(arrayOfObjects, arrayItem => arrayItem.pageCount < 100);
+})
+.catch((err) => alert(err));
