@@ -57,15 +57,18 @@ fetch(fetchUrl)
     const comicTitle = arrayItem.title;
     const liNode = document.createElement('li');
     const comicUrl = arrayItem.urls[0].url;
+    const urlTag = document.createElement('a');
+    urlTag.setAttribute('href', comicUrl);
+    urlTag.innerHTML = JSON.stringify(comicTitle);
     comicsList.appendChild(liNode);
-    liNode.innerHTML = JSON.stringify(comicTitle);
+    liNode.appendChild(urlTag);
 
-      const imgPath = arrayItem.path;
-      const imgExtension = arrayItem.extension;
-      const imgFullUrl = `${imgPath}.${imgExtension}`;
-      const imgTag = document.createElement('img');
-      imgTag.setAttribute('src', imgFullUrl);
-      liNode.appendChild(imgTag);
     const firstImages = arrayItem.images[0];
+    const imgPath = firstImages.path;
+    const imgExtension = firstImages.extension;
+    const imgFullUrl = `${imgPath}.${imgExtension}`;
+    const imgTag = document.createElement('img');
+    imgTag.setAttribute('src', imgFullUrl);
+    urlTag.appendChild(imgTag);
   });
 });
