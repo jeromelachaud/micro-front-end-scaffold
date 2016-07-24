@@ -31,8 +31,8 @@ fetch(url)
 .then((response) => response.json())
 .then((response) => {
   const results = response.data.results;
-  results.map((el) => el.prices);
-  results.filter((el) => el.price < 4);
+  const prices = results.map((el) => el.prices[0]);
+  prices.filter((el) => el.price < 4);
 });
 
 // 3. Filter the data so that it only includes comics that cost less than 4 dollars
