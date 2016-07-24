@@ -59,14 +59,11 @@ fetch(fetchUrl)
     comicsList.appendChild(liNode);
     liNode.innerHTML = JSON.stringify(comicTitle);
 
-    const arrayOfNestedObjects = arrayItem.images;
-    arrayOfNestedObjects.map((arrayItem) => {
       const imgPath = arrayItem.path;
       const imgExtension = arrayItem.extension;
       const imgFullUrl = `${imgPath}.${imgExtension}`;
       const imgTag = document.createElement('img');
       imgTag.setAttribute('src', imgFullUrl);
       liNode.appendChild(imgTag);
-    });
   });
 });
