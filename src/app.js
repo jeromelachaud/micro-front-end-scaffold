@@ -63,9 +63,9 @@ fetch(fetchUrl)
     comicsList.appendChild(liNode);
     liNode.appendChild(urlTag);
 
-    const firstImages = arrayItem.images[0];
-    const imgPath = firstImages.path;
-    const imgExtension = firstImages.extension;
+    const firstImage = arrayItem.images[0];
+    const imgPath = firstImage.path;
+    const imgExtension = firstImage.extension;
     const imgFullUrl = `${imgPath}.${imgExtension}`;
     const imgTag = document.createElement('img');
     imgTag.setAttribute('src', imgFullUrl);
