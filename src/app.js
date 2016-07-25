@@ -133,3 +133,32 @@ fetchUrl(url)
   .filter((price) => price < 4);
 });
 
+// 6.4. Display the title and first image for each comic &
+// 6.5. Add a link to the detail page for the comic to the title and image
+// Vanilla
+fetchUrl(url)
+.then((response) => {
+  response = JSON.parse(response);
+  const results = response.data.results;
+  const comicsList = document.getElementById('comics');
+
+  results.map((el) => {
+    const liNode = document.createElement('li');
+    comicsList.appendChild(liNode);
+
+    const comicTitle = el.title;
+    const comicUrl = el.urls[0].url;
+    const urlTag = document.createElement('a');
+    urlTag.innerHTML = JSON.stringify(comicTitle);
+    urlTag.setAttribute('href', comicUrl);
+    liNode.appendChild(urlTag);
+
+    const firstImage = el.images[0];
+    const imgPath = firstImage.path;
+    const imgExtension = firstImage.extension;
+    const imgFullUrl = `${imgPath}.${imgExtension}`;
+    const imgTag = document.createElement('img');
+    imgTag.setAttribute('src', imgFullUrl);
+    urlTag.appendChild(imgTag);
+  });
+});
