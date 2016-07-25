@@ -45,7 +45,8 @@ fetch(url)
   .filter((price) => price < 4);
 });
 
-// 4. Display the title and first image for each comic
+// 4. Display the title and first image for each comic &
+// 5. Add a link to the detail page for the comic to the title and image
 // Vanilla
 fetch(url)
 .then((response) => response.json())
