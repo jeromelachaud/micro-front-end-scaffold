@@ -123,3 +123,13 @@ fetchUrl(url)
   prices.filter((el) => el.price < 4);
 });
 
+// 6.3. Filter the data so that it only includes comics that cost less than 4 dollars
+// lodash
+fetchUrl(url)
+.then((response) => {
+  response = JSON.parse(response);
+  const results = response.data.results;
+  _.map(results, 'prices[0].price')
+  .filter((price) => price < 4);
+});
+
