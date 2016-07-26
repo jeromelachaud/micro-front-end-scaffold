@@ -3,12 +3,7 @@ const _ = require('lodash');
 
 const url = 'http://gateway.marvel.com/v1/public/comics?apikey=fc67721c305c84f50f7c6646c9b8d9d0';
 
-// 1. Fetch the data
-fetch(url)
-.then((response) => response.json());
-
-// 2. Filter the data so that it only includes comics with less than 100 pages
-// Vanilla
+// Fetch data with fetch API, filter results with vanilla
 fetch(url)
 .then((response) => response.json())
 .then((response) => {
@@ -17,45 +12,9 @@ fetch(url)
   .filter((el) => el.pageCount < 100)
   .filter((el) => el.prices[0].price < 4);
 
-// 2. Filter the data so that it only includes comics with less than 100 pages
-// lodash
-fetch(url)
-.then((response) => response.json())
-.then((response) => {
-  const results = response.data.results;
-  _.filter(results, el => el.pageCount < 100);
-});
-
-// 3. Filter the data so that it only includes comics that cost less than 4 dollars
-// Vanilla
-fetch(url)
-.then((response) => response.json())
-.then((response) => {
-  const results = response.data.results;
-  const prices = results.map((el) => el.prices[0]);
-  prices.filter((el) => el.price < 4);
-});
-
-// 3. Filter the data so that it only includes comics that cost less than 4 dollars
-// lodash
-fetch(url)
-.then((response) => response.json())
-.then((response) => {
-  const results = response.data.results;
-  _.map(results, 'prices[0].price')
-  .filter((price) => price < 4);
-});
-
-// 4. Display the title and first image for each comic &
-// 5. Add a link to the detail page for the comic to the title and image
-// Vanilla
-fetch(url)
-.then((response) => response.json())
-.then((response) => {
-  const results = response.data.results;
   const comicsList = document.getElementById('comics');
 
-  results.map((el) => {
+  filteredResults.map((el) => {
     const liNode = document.createElement('li');
     comicsList.appendChild(liNode);
 
@@ -76,8 +35,39 @@ fetch(url)
   });
 });
 
-// 6.1. Fetch the data using
-// XMLHttpRequest and Promises
+// Fetch data with fetch API, filter results with lodash
+fetch(url)
+.then((response) => response.json())
+.then((response) => {
+  const results = response.data.results;
+  const filteredResults =
+  _.filter(results, el => el.pageCount < 100)
+  .filter((el) => el.prices[0].price < 4);
+
+  const comicsList = document.getElementById('comics');
+
+  filteredResults.map((el) => {
+    const liNode = document.createElement('li');
+    comicsList.appendChild(liNode);
+
+    const comicTitle = el.title;
+    const comicUrl = el.urls[0].url;
+    const urlTag = document.createElement('a');
+    urlTag.innerHTML = JSON.stringify(comicTitle);
+    urlTag.setAttribute('href', comicUrl);
+    liNode.appendChild(urlTag);
+
+    const firstImage = el.images[0];
+    const imgPath = firstImage.path;
+    const imgExtension = firstImage.extension;
+    const imgFullUrl = `${imgPath}.${imgExtension}`;
+    const imgTag = document.createElement('img');
+    imgTag.setAttribute('src', imgFullUrl);
+    urlTag.appendChild(imgTag);
+  });
+});
+
+// Fetch data with XMLHttpRequest and Promises
 function fetchUrl(url) {
   return new Promise((resolve, reject) => {
     let request = new XMLHttpRequest();
@@ -93,61 +83,50 @@ function fetchUrl(url) {
     request.send();
   });
 }
-fetchUrl(url);
 
-// 6.2. Filter the data so that it only includes comics with less than 100 pages
-// Vanilla
+// Filter results with vanilla
 fetchUrl(url)
 .then((response) => {
   response = JSON.parse(response);
   const results = response.data.results;
-  results.filter(el => el.pageCount < 100);
-})
-.catch((err) => alert(err));
   const filteredResults = results
   .filter((el) => el.pageCount < 100)
   .filter((el) => el.prices[0].price < 4);
-
-// 6.2. Filter the data so that it only includes comics with less than 100 pages
-// lodash
-fetchUrl(url)
-.then((response) => {
-  response = JSON.parse(response);
-  const results = response.data.results;
-  _.filter(results, el => el.pageCount < 100);
-})
-.catch((err) => alert(err));
-
-// 6.3. Filter the data so that it only includes comics that cost less than 4 dollars
-// Vanilla
-fetchUrl(url)
-.then((response) => {
-  response = JSON.parse(response);
-  const results = response.data.results;
-  const prices = results.map((el) => el.prices[0]);
-  prices.filter((el) => el.price < 4);
-});
-
-// 6.3. Filter the data so that it only includes comics that cost less than 4 dollars
-// lodash
-fetchUrl(url)
-.then((response) => {
-  response = JSON.parse(response);
-  const results = response.data.results;
-  _.map(results, 'prices[0].price')
-  .filter((price) => price < 4);
-});
-
-// 6.4. Display the title and first image for each comic &
-// 6.5. Add a link to the detail page for the comic to the title and image
-// Vanilla
-fetchUrl(url)
-.then((response) => {
-  response = JSON.parse(response);
-  const results = response.data.results;
   const comicsList = document.getElementById('comics');
 
-  results.map((el) => {
+  filteredResults.map((el) => {
+    const liNode = document.createElement('li');
+    comicsList.appendChild(liNode);
+
+    const comicTitle = el.title;
+    const comicUrl = el.urls[0].url;
+    const urlTag = document.createElement('a');
+    urlTag.innerHTML = JSON.stringify(comicTitle);
+    urlTag.setAttribute('href', comicUrl);
+    liNode.appendChild(urlTag);
+
+    const firstImage = el.images[0];
+    const imgPath = firstImage.path;
+    const imgExtension = firstImage.extension;
+    const imgFullUrl = `${imgPath}.${imgExtension}`;
+    const imgTag = document.createElement('img');
+    imgTag.setAttribute('src', imgFullUrl);
+    urlTag.appendChild(imgTag);
+  });
+});
+
+// Filter results with lodash
+fetchUrl(url)
+.then((response) => {
+  response = JSON.parse(response);
+  const results = response.data.results;
+  const filteredResults =
+  _.filter(results, el => el.pageCount < 100)
+  .filter((el) => el.prices[0].price < 4);
+
+  const comicsList = document.getElementById('comics');
+
+  filteredResults.map((el) => {
     const liNode = document.createElement('li');
     comicsList.appendChild(liNode);
 
