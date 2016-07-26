@@ -13,8 +13,9 @@ fetch(url)
 .then((response) => response.json())
 .then((response) => {
   const results = response.data.results;
-  results.filter((el) => el.pageCount < 100);
-});
+  const filteredResults = results
+  .filter((el) => el.pageCount < 100)
+  .filter((el) => el.prices[0].price < 4);
 
 // 2. Filter the data so that it only includes comics with less than 100 pages
 // lodash
@@ -103,6 +104,9 @@ fetchUrl(url)
   results.filter(el => el.pageCount < 100);
 })
 .catch((err) => alert(err));
+  const filteredResults = results
+  .filter((el) => el.pageCount < 100)
+  .filter((el) => el.prices[0].price < 4);
 
 // 6.2. Filter the data so that it only includes comics with less than 100 pages
 // lodash
