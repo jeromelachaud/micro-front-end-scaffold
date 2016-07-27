@@ -21,7 +21,7 @@ fetch(url)
     const comicTitle = el.title;
     const comicUrl = el.urls[0].url;
     const urlTag = document.createElement('a');
-    urlTag.innerHTML = JSON.stringify(comicTitle);
+    urlTag.innerHTML =comicTitle;
     urlTag.setAttribute('href', comicUrl);
     liNode.appendChild(urlTag);
 
@@ -129,6 +129,8 @@ fetchUrl(url)
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
     comicsList.appendChild(liNode);
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
+    // look lodash templates
 
     const comicTitle = el.title;
     const comicUrl = el.urls[0].url;
