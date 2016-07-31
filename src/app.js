@@ -40,9 +40,10 @@ fetch(url)
 .then((response) => response.json())
 .then((response) => {
   const results = response.data.results;
-  const filteredResults =
-  _.filter(results, el => el.pageCount < 100)
-  .filter((el) => el.prices[0].price < 4);
+  const filteredResults = _(results)
+  .filter(el => el.pageCount < 100)
+  .filter(el => el.prices[0].price < 4)
+  .value();
 
   const comicsList = document.getElementById('comics');
 
@@ -120,9 +121,10 @@ fetchUrl(url)
 .then((response) => {
   response = JSON.parse(response);
   const results = response.data.results;
-  const filteredResults =
-  _.filter(results, el => el.pageCount < 100)
-  .filter((el) => el.prices[0].price < 4);
+  const filteredResults = _(results)
+  .filter(el => el.pageCount < 100)
+  .filter(el => el.prices[0].price < 4)
+  .value();
 
   const comicsList = document.getElementById('comics');
 
