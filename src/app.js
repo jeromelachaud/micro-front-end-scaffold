@@ -21,7 +21,7 @@ fetch(url)
     const comicTitle = el.title;
     const comicUrl = el.urls[0].url;
     const urlTag = document.createElement('a');
-    urlTag.innerHTML =comicTitle;
+    urlTag.innerHTML = comicTitle;
     urlTag.setAttribute('href', comicUrl);
     liNode.appendChild(urlTag);
 
