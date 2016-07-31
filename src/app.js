@@ -53,22 +53,21 @@ fetch(url)
 
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
-    comicsList.appendChild(liNode);
-
-    const comicTitle = el.title;
     const comicUrl = el.urls[0].url;
-    const urlTag = document.createElement('a');
-    urlTag.innerHTML = JSON.stringify(comicTitle);
-    urlTag.setAttribute('href', comicUrl);
-    liNode.appendChild(urlTag);
-
+    const comicTitle = el.title;
     const firstImage = el.images[0];
     const imgPath = firstImage.path;
     const imgExtension = firstImage.extension;
     const imgFullUrl = `${imgPath}.${imgExtension}`;
-    const imgTag = document.createElement('img');
-    imgTag.setAttribute('src', imgFullUrl);
-    urlTag.appendChild(imgTag);
+
+    const template = _.template('<a href=<%= url %>><%= title %><img src=<%= img %>></a>');
+    const liNodeContent = template({
+      url: comicUrl,
+      title: comicTitle,
+      img: imgFullUrl
+    });
+
+    liNode.innerHTML = liNodeContent;
     docfrag.appendChild(liNode);
   });
 
@@ -142,24 +141,23 @@ fetchUrl(url)
 
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
-    comicsList.appendChild(liNode);
     // https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
     // look lodash templates
-
-    const comicTitle = el.title;
     const comicUrl = el.urls[0].url;
-    const urlTag = document.createElement('a');
-    urlTag.innerHTML = JSON.stringify(comicTitle);
-    urlTag.setAttribute('href', comicUrl);
-    liNode.appendChild(urlTag);
-
+    const comicTitle = el.title;
     const firstImage = el.images[0];
     const imgPath = firstImage.path;
     const imgExtension = firstImage.extension;
     const imgFullUrl = `${imgPath}.${imgExtension}`;
-    const imgTag = document.createElement('img');
-    imgTag.setAttribute('src', imgFullUrl);
-    urlTag.appendChild(imgTag);
+
+    const template = _.template('<a href=<%= url %>><%= title %><img src=<%= img %>></a>');
+    const liNodeContent = template({
+      url: comicUrl,
+      title: comicTitle,
+      img: imgFullUrl
+    });
+
+    liNode.innerHTML = liNodeContent;
     docfrag.appendChild(liNode);
   });
 
