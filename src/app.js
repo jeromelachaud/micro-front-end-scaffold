@@ -141,8 +141,6 @@ fetchUrl(url)
 
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
-    // https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
-    // look lodash templates
     const comicUrl = el.urls[0].url;
     const comicTitle = el.title;
     const firstImage = el.images[0];
