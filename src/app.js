@@ -13,10 +13,10 @@ fetch(url)
   .filter((el) => el.prices[0].price < 4);
 
   const comicsList = document.getElementById('comics');
+  const docfrag = document.createDocumentFragment();
 
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
-    comicsList.appendChild(liNode);
 
     const comicTitle = el.title;
     const comicUrl = el.urls[0].url;
@@ -32,7 +32,10 @@ fetch(url)
     const imgTag = document.createElement('img');
     imgTag.setAttribute('src', imgFullUrl);
     urlTag.appendChild(imgTag);
+    docfrag.appendChild(liNode);
   });
+
+  comicsList.appendChild(docfrag);
 });
 
 // Fetch data with fetch API, filter results with lodash
@@ -46,6 +49,7 @@ fetch(url)
   .value();
 
   const comicsList = document.getElementById('comics');
+  const docfrag = document.createDocumentFragment();
 
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
@@ -65,7 +69,10 @@ fetch(url)
     const imgTag = document.createElement('img');
     imgTag.setAttribute('src', imgFullUrl);
     urlTag.appendChild(imgTag);
+    docfrag.appendChild(liNode);
   });
+
+  comicsList.appendChild(docfrag);
 });
 
 // Fetch data with XMLHttpRequest and Promises
@@ -93,16 +100,17 @@ fetchUrl(url)
   const filteredResults = results
   .filter((el) => el.pageCount < 100)
   .filter((el) => el.prices[0].price < 4);
+
   const comicsList = document.getElementById('comics');
+  const docfrag = document.createDocumentFragment();
 
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
-    comicsList.appendChild(liNode);
 
     const comicTitle = el.title;
     const comicUrl = el.urls[0].url;
     const urlTag = document.createElement('a');
-    urlTag.innerHTML = JSON.stringify(comicTitle);
+    urlTag.innerHTML = comicTitle;
     urlTag.setAttribute('href', comicUrl);
     liNode.appendChild(urlTag);
 
@@ -113,7 +121,10 @@ fetchUrl(url)
     const imgTag = document.createElement('img');
     imgTag.setAttribute('src', imgFullUrl);
     urlTag.appendChild(imgTag);
+    docfrag.appendChild(liNode);
   });
+
+  comicsList.appendChild(docfrag);
 });
 
 // Filter results with lodash
@@ -127,6 +138,7 @@ fetchUrl(url)
   .value();
 
   const comicsList = document.getElementById('comics');
+  const docfrag = document.createDocumentFragment();
 
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
@@ -148,5 +160,8 @@ fetchUrl(url)
     const imgTag = document.createElement('img');
     imgTag.setAttribute('src', imgFullUrl);
     urlTag.appendChild(imgTag);
+    docfrag.appendChild(liNode);
   });
+
+  comicsList.appendChild(docfrag);
 });
