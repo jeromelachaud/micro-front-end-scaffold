@@ -141,6 +141,7 @@ fetchUrl(url)
 
   filteredResults.map((el) => {
     const liNode = document.createElement('li');
+
     const comicUrl = el.urls[0].url;
     const comicTitle = el.title;
     const firstImage = el.images[0];
@@ -148,7 +149,9 @@ fetchUrl(url)
     const imgExtension = firstImage.extension;
     const imgFullUrl = `${imgPath}.${imgExtension}`;
 
-    const template = _.template('<a href=<%= url %>><%= title %><img src=<%= img %>></a>');
+    const template = _.template(
+      '<a href=<%= url %>><%= title %><img src=<%= img %>></a>'
+    );
     const liNodeContent = template({
       url: comicUrl,
       title: comicTitle,
