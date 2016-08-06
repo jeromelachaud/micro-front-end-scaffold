@@ -1,8 +1,8 @@
-@import url('../node_modules/normalize.css/normalize.css');
+@import url('node_modules/normalize.css/normalize.css');
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 
 body {
-  background: #b50f16;
+  background: #123;
   font-family: 'Permanent Marker', cursive;
 }
 
