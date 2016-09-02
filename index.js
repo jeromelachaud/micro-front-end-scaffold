@@ -1,5 +1,4 @@
-const _ = require('lodash');
-const __ = require('lodash/fp');
+const _ = require('lodash/fp');
 
 const comics = [
   {pages: 100, price: 50},
